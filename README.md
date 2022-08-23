@@ -16,5 +16,6 @@ npm start
 # Скриншот
 
 
+<img width="784" alt="Снимок экрана 2022-08-23 в 18 37 05" src="https://user-images.githubusercontent.com/105541761/186201516-a077cd42-2544-451b-9139-e79c52800f24.png">
 
 
