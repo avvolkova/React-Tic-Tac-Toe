@@ -7,8 +7,8 @@ Tic Tac Toe game in Javascript applying React, Redux.
 It is planned to supplement the game with AI, winner rating, the ability to select the size of fields.
 
 # Для запуска игры // Game Launching
-> npm install
-> npm start
+npm install
+npm start
 
 версия ноды - v18.2.0
 

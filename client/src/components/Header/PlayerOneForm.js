@@ -11,7 +11,7 @@ export default function PlayerOneForm() {
     e.preventDefault();
     dispatch(setPlayerOneAC(e.target.namefirst.value));
   };
-  // для изменеие имени игрока 2
+  // для изменеия имени игрока 2
   return (
     <div className={styles.playerform}>
       <div>

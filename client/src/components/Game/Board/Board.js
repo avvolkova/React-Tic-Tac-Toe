@@ -38,7 +38,7 @@ export default function GameLogic() {
     setResult({ winner: 'none', state: 'none' });
   };
 
-  // проверка на наличие побелителя и вызова модального окна
+  // проверка на наличие победителя и вызова модального окна
   // (использую внешнюю библиотеку sweetalert)
   const gameOver = (winner, state) => {
     setResult({ winner, state });
@@ -73,8 +73,7 @@ export default function GameLogic() {
     }
   };
 
-  //   проверка на победителя с учетом существущих
-  // прописанной модели поведения при выигрыше(pattern)
+  //   проверка на победителя с учетом patterns выигрыша
   const checkIfWin = () => {
     const winnerPattern = Patterns.find((currPattern) => {
       const firstPlayer = board[currPattern[0]];
@@ -102,7 +101,7 @@ export default function GameLogic() {
     }
     return false;
   };
-  // фунция которая для порядка проверяет(1) победителя, если нет, то ничью,
+  // фунция которая по порядку проверяет(1) победителя, если нет, то проверяет ничью,
   // если нет, то переключает игрока
   const checkGameStatus = () => {
     const isWin = checkIfWin();
