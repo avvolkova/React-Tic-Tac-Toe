@@ -10,6 +10,7 @@ export default function PlayeTwoForm() {
     e.preventDefault();
     dispatch(setPlayerSecondAC(e.target.namesecond.value));
   };
+  // для изменения имени игрока 2
   return (
     <div className={styles.playerform}>
       <div>
@@ -22,9 +23,8 @@ export default function PlayeTwoForm() {
         <input
           className={styles.input}
           name="namesecond"
-        //   autoComplete="user-name"
           placeholder={nameSecond}
-        //   onChange={(e) => e.target.namesecond.value}
+
         />
         <div className={styles.line}>
           <button

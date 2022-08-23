@@ -6,13 +6,13 @@ import Square from '../Square/Square';
 import { Patterns } from '../Patterns/Patterns';
 
 export default function GameLogic() {
-  const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
-  const [player, setPlayer] = useState('0');
+  const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']); // доска
+  const [player, setPlayer] = useState('0'); // игрок - сами крестики и нолики для игры
   const [result, setResult] = useState({ winner: 'none', state: 'none' });
-  const [modalActive, setModalActive] = useState(false);
 
   const dispatch = useDispatch();
-
+  // store для того, чтобы иметь возможность использоать в разных компонентах имена,
+  // cохраняю имена на протяжении всей игры пользователей
   const nameFirst = useSelector((state) => state.playerfirst.playerFirst);
   const nameSecond = useSelector((state) => state.playersecond.playerSecond);
   const playerNames = {
@@ -20,6 +20,7 @@ export default function GameLogic() {
     0: nameSecond,
   };
 
+  // функция для заполнения каждого квадрата X и 0
   const fillSquare = (square) => {
     const newBoard = board.map((val, idx) => {
       if (idx === square && val === '') {
@@ -30,13 +31,15 @@ export default function GameLogic() {
 
     setBoard(newBoard);
   };
-
+  // cброс состояний для возобновления игры "с нуля".
   const restartGame = () => {
     setBoard(['', '', '', '', '', '', '', '', '']);
     setPlayer('0');
     setResult({ winner: 'none', state: 'none' });
   };
 
+  // проверка на наличие побелителя и вызова модального окна
+  // (использую внешнюю библиотеку sweetalert)
   const gameOver = (winner, state) => {
     setResult({ winner, state });
     if (winner === '') { swal('Game is over', `the winner is: ${player}`); } else {
@@ -45,6 +48,7 @@ export default function GameLogic() {
     restartGame();
   };
 
+  // проверка на ничью
   const checkIfTie = () => {
     let filled = true;
     board.forEach((square) => {
@@ -60,7 +64,8 @@ export default function GameLogic() {
     return false;
   };
 
-  const fillEmptySquare = () => {
+  // переключение X/0
+  const сhangePlayer = () => {
     if (player === 'X') {
       setPlayer('0');
     } else {
@@ -68,6 +73,8 @@ export default function GameLogic() {
     }
   };
 
+  //   проверка на победителя с учетом существущих
+  // прописанной модели поведения при выигрыше(pattern)
   const checkIfWin = () => {
     const winnerPattern = Patterns.find((currPattern) => {
       const firstPlayer = board[currPattern[0]];
@@ -95,7 +102,8 @@ export default function GameLogic() {
     }
     return false;
   };
-
+  // фунция которая для порядка проверяет(1) победителя, если нет, то ничью,
+  // если нет, то переключает игрока
   const checkGameStatus = () => {
     const isWin = checkIfWin();
     if (isWin) {
@@ -107,15 +115,12 @@ export default function GameLogic() {
       return;
     }
 
-    fillEmptySquare();
+    сhangePlayer();
   };
-
+  // один юзеффект который вызывает функцию по проверке победителя и ничьи
   useEffect(() => {
     checkGameStatus();
   }, [board]);
-
-  useEffect(() => {
-  }, [nameFirst, nameSecond]);
 
   return (
     <div className={styles.game}>
@@ -127,9 +132,6 @@ export default function GameLogic() {
           {' '}
           -
           {'  '}
-          {/* <span className={styles.X0}>
-            {player}
-          </span> */}
         </div>
         <div className={styles.X0}>
           {player}
@@ -206,7 +208,6 @@ export default function GameLogic() {
           />
         </div>
       </div>
-      {/* <Modal active={modalActive} setActive={setModalActive} /> */}
     </div>
   );
 }

@@ -1,6 +1,3 @@
-import {
-  Routes, Route, Navigate,
-} from 'react-router-dom';
 import './App.css';
 import PlayerTwoForm from './components/Header/PlayerTwoForm';
 import PlayerOneForm from './components/Header/PlayerOneForm';
